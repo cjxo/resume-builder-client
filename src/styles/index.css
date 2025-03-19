@@ -1,0 +1,78 @@
+@font-face {
+  font-family: "Exo2";
+  src: url("../assets/font/Exo_2/Exo2-VariableFont_wght.ttf");
+}
+
+:root {
+  font-family: "Exo2";
+  
+  --blue0: #252634;
+  --yellow0: #f3e489;
+  
+  --blue0: #ffffff;
+  --yellow0: #000000;
+  
+  background-color: var(--blue0);
+  color: var(--yellow0);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  padding: 0px;
+  margin: 0px;
+  font-weight: normal;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+button {
+  box-sizing: border-box;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input {
+  font-family: inherit;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 8px;
+}
+
+#error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.main-content {
+  
+}

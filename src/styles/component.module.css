@@ -1,0 +1,19 @@
+.topBar {
+  .title {
+    text-align: center;
+    font-weight: 600;
+    
+    @media (min-width: 768px) {
+      text-align: left;
+			font-size: 32px;
+    }
+  }
+}
+
+.bottomBar {
+  text-align: center;
+}
+
+.resumeInput {
+	border: 1px solid red;
+}
