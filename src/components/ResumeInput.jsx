@@ -41,37 +41,102 @@ const GeneralInterface = () => {
 };
 
 const EducationInterface = () => {
-	return (
-		<div className={styles.experiences}>
-			<ul>
-				<li>
-					<ButtonImage
-						alt="delete entry"
-						src="./svgrepo/trash-bin-minimalistic-svgrepo-com.svg"
-						className={styles.deleteBtn}
-					/>
-					<div className={styles.info}>
-						<h3>Some Epic School</h3>
-						<p>2010 - 2018</p>
-					</div>
-				</li>
+	const [schools, setSchools] = useState([
+		{
+			id: 1,
+			name: "Some Epic School",
+			from: 2010,
+			to: 2018
+		},
+		{
+			id: 2,
+			name: "Wellspring Christian Family Schools",
+			from: 2019,
+			to: 2022,
+		},
+	]);
 
-				<li>
-					<ButtonImage
-						alt="delete entry"
-						src="./svgrepo/trash-bin-minimalistic-svgrepo-com.svg"
-						className={styles.deleteBtn}
-					/>
-					<div className={styles.info}>
-						<h3>Some Epic School</h3>
-						<p>2010 - 2018</p>
-					</div>
-				</li>
-			</ul>
-
-			<Button0 className={styles.btnAddNewExp}>New</Button0>
-		</div>
-	);
+	const [addingExperience, setAddingExperience] = useState(false);
+	
+	const handleSubmit = (e) => {
+	  e.preventDefault();
+	  const fd = new FormData(e.target);
+	  const schoolName = fd.get("school-name");
+	  const syFrom = fd.get("sy-from");
+	  const syTo = fd.get("sy-to");
+	  setSchools([
+	    ...schools,
+	    { id: schools.length + 1, name: schoolName, from: syFrom, to: syTo }
+	  ]);
+	  
+	  setAddingExperience(false);
+	};
+  
+	if (addingExperience) {
+	  return (
+	    <form onSubmit={handleSubmit}>
+	      <div className={styles.formField}>
+	        <label htmlFor="school-name">School Name</label>
+	        <input type="text" id="school-name" name="school-name" required />
+	      </div>
+	      
+	      <div className={styles.schoolYear}>
+	        <div className={styles.formField}>
+	          <label htmlFor="sy-from">From</label>
+	          <input type="number" min="0" max="9999" id="sy-from" name="sy-from" required />
+	        </div>
+	        
+	        <div className={styles.formField}>
+	          <label htmlFor="sy-to">To</label>
+	          <input type="number" min="0" max="9999" id="sy-to" name="sy-to" required />
+	        </div>
+	      </div>
+	      
+	      <div className={styles.cancelok}>
+  	      <Button0
+  	        onClick={() => setAddingExperience(false)}
+  	        className={styles.cancel}
+  	        type="button"
+  	      >
+  	        Cancel
+  	      </Button0>
+  	      <Button0
+  	        className={styles.ok}
+  	      >
+  	        Ok
+  	      </Button0>
+	      </div>
+	    </form>
+	  );
+	} else {
+  	return (
+  		<div className={styles.experiences}>
+  			<ul>
+  				{schools.map(school => (
+  					<li key={school.id}>
+  						<ButtonImage
+  							alt="delete entry"
+  							src="./svgrepo/trash-bin-minimalistic-svgrepo-com.svg"
+  							className={styles.deleteBtn}
+  							onClick={() => setSchools(schools.filter(s => s.id !== school.id))}
+  						/>
+  						<div className={styles.info}>
+  							<h3>{school.name}</h3>
+  							<p>{school.from + " - " + school.to}</p>
+  						</div>
+  					</li>
+  				))}
+  			</ul>
+  
+  			<Button0
+  				className={styles.btnAddNewExp}
+  				onClick={() => setAddingExperience(true)}
+  			>
+  				New
+  			</Button0>
+  		</div>
+  	);
+	}
 };
 
 const SkillsInput = () => {
