@@ -15,7 +15,7 @@ const App = () => {
       </main>
       <BottomBar />
     </>
-  )
-}
+  );
+};
 
 export default App;

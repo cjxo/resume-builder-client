@@ -3,18 +3,30 @@
   src: url("../assets/font/Exo_2/Exo2-VariableFont_wght.ttf");
 }
 
-:root {
-  font-family: "Exo2";
-  
-  --blue0: #252634;
-  --yellow0: #f3e489;
-  
-  --blue0: #ffffff;
-  --yellow0: #000000;
-  
-  background-color: var(--blue0);
-  color: var(--yellow0);
+@font-face {
+	font-family: "JosefinSans";
+	src: url("../assets/font/Josefin_Sans/JosefinSans-VariableFont_wght.ttf");
+}
 
+@font-face {
+	font-family: "JosefinSansIt";
+	src: url("../assets/font/Josefin_Sans/JosefinSans-Italic-VariableFont_wght.ttf");
+}
+
+:root {
+  font-family: "JosefinSans";
+  
+  --blue0: #4e4f64;
+	--blue1: #5b5476;
+	--blue2: #e3edf4;
+
+  --yellow0: #f3e489;
+	--yellow1: #dbb979;
+  
+/*
+  background-color: var(--blue0);
+  color: var(--yellow0);*/
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -52,6 +64,8 @@ button {
   box-sizing: border-box;
   font-family: inherit;
   cursor: pointer;
+	border: none;
+	color: inherit;
 }
 
 input {
@@ -74,5 +88,5 @@ input {
 }
 
 .main-content {
-  
+  display: flex;
 }
