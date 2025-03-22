@@ -1,26 +1,23 @@
 .buttonImage {
-	background-color: transparent;
+  background-color: transparent;
 }
 
 .button0 {
-	border: 2px solid white;
-	background-color: var(--blue1);
-	color: var(--blue2);
-	font-size: 16px;
-	width: 100%;
-	border-radius: 8px;
-
-	transition-timing-function: ease;
-	transition-duration: 200ms;
- 	
-	&:hover {
-		color: var(--blue0);
-		background-color: var(--yellow1);
-	}
-
-	@media (min-width: 768px) {
-		font-size: 20px;
-	}
+  border: 2px solid white;
+  background-color: var(--blue1);
+  color: var(--blue2);
+  font-size: 16px;
+  width: 100%;
+  border-radius: 8px;
+  
+  &:hover {
+    color: var(--blue0);
+    background-color: var(--yellow1);
+  }
+  
+  @media (min-width: 768px) {
+    font-size: 18px;
+  }
 }
 
 .topBar {
@@ -30,11 +27,11 @@
     
     @media (min-width: 768px) {
       text-align: left;
-			font-size: 32px;
+      font-size: 32px;
     }
   }
-
-	margin-bottom: 16px;
+  
+  margin-bottom: 16px;
 }
 
 .bottomBar {
@@ -42,164 +39,218 @@
 }
 
 .resumeInput {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-	flex-basis: 400px;
-
-	.inputList, .fieldDisplay {
-		border-radius: 8px;
-		background-color: var(--blue0);
-		padding: 8px;
-	}
-
-	.inputList {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 8px;
-	
-		button {
-			padding: 16px;
-			&.selected {
-				color: var(--blue0);
-				background-color: var(--yellow1);
-			}
-		}
-	}
-
-	.fieldDisplay {
-		padding: 8px 16px;
-		@media (min-width: 768px) {
-			padding: 8px 32px;
-		}
-
-		h2 {
-			text-align: center;
-			color: var(--blue2);
-			font-size: 26px;
-			font-weight: 700;
-
-			@media (min-width: 768px) {
-				font-size: 32px;
-			}
-		}
-
-		form {
-			display: flex;
-			flex-direction: column;
-			gap: 16px;
-
-			input {
-				padding: 8px;
-  			border-radius: 8px;
-				font-size: 16px;
-  			box-shadow: inset 1px 1px 4px #888;
-			}
-
-			label {
-				font-family: "JosefinSansIt";
-				color: var(--blue2);
-				@media (min-width: 768px) {
-					font-size: 20px;
-				}
-			}
-			
-			.cancelok {
-			  display: flex;
-			  gap: 16px; 
-  			.cancel, .ok {
-  			  padding: 8px;
-  			}
-  			
-  			.cancel {    	
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-basis: 400px;
+  
+  .addBtn, .deleteBtn {
+    border-radius: 8px;
+    display: flex;
+    height: fit-content;
+    padding: 4px;
+    flex-shrink: 0;
+    width: fit-content;
+  }
+  
+  .deleteBtn {
+    background-color: var(--red0);
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  
+  .addBtn {
+    background-color: var(--blue3);
+    border: 2px solid white;
+    
+    &:hover {
+      background-color: var(--green0);
+    }
+    
+    img {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  
+  .inputList, .fieldDisplay {
+    border-radius: 8px;
+    background-color: var(--blue0);
+    padding: 8px;
+  }
+  
+  .inputList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    
+    button {
+      padding: 16px;
+      &.selected {
+        color: var(--blue0);
+        background-color: var(--yellow1);
+      }
+    }
+  }
+  
+  .fieldDisplay {
+    padding: 8px 16px;
+    @media (min-width: 768px) {
+      padding: 8px 32px;
+    }
+    
+    h2 {
+      text-align: center;
+      color: var(--blue2);
+      font-size: 24px;
+      font-weight: 600;
+      
+      @media (min-width: 768px) {
+        font-size: 32px;
+      }
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      
+      input {
+        padding: 8px;
+        border-radius: 8px;
+        font-size: 16px;
+        box-shadow: inset 1px 1px 4px #888;
+      }
+      
+      label {
+        font-family: "JosefinSansIt";
+        color: var(--blue2);
+        @media (min-width: 768px) {
+          font-size: 18px;
+        }
+      }
+      
+      .cancelok {
+        display: flex;
+        gap: 16px;
+        .cancel, .ok {
+          padding: 8px;
+        }
+        
+        .cancel {
           &:hover {
-        		background-color: var(--red0);
-        	}
-  			}
-
-  			.ok {    	
+            background-color: var(--red0);
+          }
+        }
+        
+        .ok {
           &:hover {
-        		background-color: var(--green0);
-        	}
-  			}
-			}
-			
-			.schoolYear {
-			  display: flex;
-			  gap: 16px;
-			  
-			  .formField {
-			    flex-grow: 1;
-			  }
-			}
-
-			.formField {
-				display: flex;
-				flex-direction: column;
-				gap: 4px;
-			}
-		}
-
-		.experiences {
-			color: var(--blue2);
-			display: flex;
-			flex-direction: column;
-
-			.btnAddNewExp {
-				padding: 8px 32px;
-				margin-left: auto;
-				width: fit-content;
-			}
-
-			.deleteBtn {
-				background-color: var(--red0);
-				border-radius: 8px;
-				display: flex;
-				height: fit-content;
-				padding: 4px;
-				
-				img {
-					width: 24px;
-					height: 24px;
-				}
-			}
-
-      /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_text/Wrapping_breaking_text */ 
-			.info {
-				font-family: "JosefinSansIt";
-				h3 {
-					font-size: 20px;
-					word-break: break-all;
-					hyphens: manual;
-					@media (min-width: 768px) {
-						font-size: 24px;
-					}
-				}
-
-				p {
-					font-weight: 200;
-					font-size: 18px;
-					opacity: 0.8;
-
-					@media (min-width: 768px) {
-						font-size: 20px;
-					}
-				}
-			}
-
-			ul {
-				display: flex;
-				flex-direction: column;
-				gap: 16px;
-				li {
-					display: flex;
-					gap: 8px;
-				}
-			}
-		}
-	}
+            background-color: var(--green0);
+          }
+        }
+      }
+      
+      .schoolYear {
+        display: flex;
+        gap: 16px;
+        
+        .formField {
+          flex-grow: 1;
+        }
+      }
+      
+      .formField {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        
+        ul {
+          list-style-type: circle;
+          font-family: "JosefinSansIt";
+          li {
+            margin-left: 16px;
+            word-break: break-all;
+            font-weight: 300;
+          }
+          color: var(--blue2);
+        }
+        
+        .achievementInput {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          
+          input {
+            flex-grow: 1;
+          }
+        }
+      }
+    }
+    
+    .experiences {
+      color: var(--blue2);
+      display: flex;
+      flex-direction: column;
+      
+      .btnAddNewExp {
+        padding: 8px 32px;
+        margin-left: auto;
+        width: fit-content;
+      }
+      
+      /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_text/Wrapping_breaking_text */
+      .info {
+        font-family: "JosefinSansIt";
+        h3 {
+          font-size: 18px;
+          word-break: break-all;
+          @media (min-width: 768px) {
+            font-size: 20px;
+          }
+        }
+        
+        p.duration {
+          font-weight: 200;
+          font-size: 16px;
+          opacity: 0.8;
+          
+          @media (min-width: 768px) {
+            font-size: 18px;
+          }
+        }
+        
+        p.position {
+          font-weight: 400;
+          opacity: 0.9;
+          
+          @media (min-width: 768px) {
+            font-size: 18px;
+          }
+        }
+      }
+      
+      ul.experienceList {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        li {
+          display: flex;
+          gap: 8px;
+        }
+      }
+      
+      ul.achievements > li {
+        font-weight: 300;
+        display: list-item;
+        list-style-type: circle;
+        margin-left: 16px;
+      }
+    }
+  }
 }
 
 .resumeDisplay {
-	flex-grow: 1;
+  flex-grow: 1;
 }

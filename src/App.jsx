@@ -11,7 +11,7 @@ const App = () => {
       <TopBar />
       <main className="main-content">
         <ResumeInput />
-				<ResumeDisplay />
+        <ResumeDisplay />
       </main>
       <BottomBar />
     </>

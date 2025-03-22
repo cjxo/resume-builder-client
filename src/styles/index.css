@@ -1,27 +1,58 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}
+
 @font-face {
   font-family: "Exo2";
   src: url("../assets/font/Exo_2/Exo2-VariableFont_wght.ttf");
 }
 
 @font-face {
-	font-family: "JosefinSans";
-	src: url("../assets/font/Josefin_Sans/JosefinSans-VariableFont_wght.ttf");
+  font-family: "JosefinSans";
+  src: url("../assets/font/Josefin_Sans/JosefinSans-VariableFont_wght.ttf");
 }
 
 @font-face {
-	font-family: "JosefinSansIt";
-	src: url("../assets/font/Josefin_Sans/JosefinSans-Italic-VariableFont_wght.ttf");
+  font-family: "JosefinSansIt";
+  src: url("../assets/font/Josefin_Sans/JosefinSans-Italic-VariableFont_wght.ttf");
 }
 
 :root {
   font-family: "JosefinSans";
   
   --blue0: #4e4f64;
-	--blue1: #5b5476;
-	--blue2: #e3edf4;
+  --blue1: #5b5476;
+  --blue2: #e3edf4;
 
   --yellow0: #f3e489;
-	--yellow1: #dbb979;
+  --yellow1: #dbb979;
 
   --red0: #ed706c;
   
@@ -36,17 +67,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 a {
-  box-sizing: border-box;
   text-decoration: none;
 }
 
 body {
-  margin: 0;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -55,24 +80,16 @@ h1, h2, h3, h4, h5, h6, p {
   padding: 0px;
   margin: 0px;
   font-weight: normal;
-}
-
-ul {
-	list-style-type: none;
-	padding: 0px;
-	margin: 0px;
+  overflow-wrap: break-word;
 }
 
 button {
-  box-sizing: border-box;
-  font-family: inherit;
   cursor: pointer;
-	border: none;
-	color: inherit;
-}
-
-input {
-  font-family: inherit;
+  border: none;
+  color: inherit;
+  
+  transition-timing-function: ease;
+  transition-duration: 200ms;
 }
 
 #root {
