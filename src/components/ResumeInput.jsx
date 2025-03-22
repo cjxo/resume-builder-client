@@ -3,40 +3,18 @@ import { useState, useRef } from "react";
 import ButtonImage from "./ButtonImage";
 import { Button0 } from "./Button.jsx";
 import styles from "../styles/component.module.css";
+import ResumeForm, { ResumeInputField, ResumeCancelOk } from "./ResumeForm";
 
 const GeneralInterface = () => {
   return (
-    <form>
-      <div className={styles.formField}>
-        <label htmlFor="full-name">Full Name</label>
-        <input type="text" id="full-name" name="full-name" />
-      </div>
-    
-      <div className={styles.formField}>
-        <label htmlFor="occupation">Occupation</label>
-        <input type="text" id="occupation" name="occupation" />
-      </div>
-    
-      <div className={styles.formField}>
-        <label htmlFor="telephone">Telephone</label>
-        <input type="tel" id="telephone" name="telephone" />
-      </div>
-    
-      <div className={styles.formField}>
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" />
-      </div>
-    
-      <div className={styles.formField}>
-        <label htmlFor="location">Location</label>
-        <input type="text" id="location" name="location" />
-      </div>
-      
-      <div className={styles.formField}>
-        <label htmlFor="linkedin">LinkedIn</label>
-        <input type="text" id="linkedin" name="linkedin" />
-      </div>
-    </form>
+    <ResumeForm>
+      <ResumeInputField label="Full Name:" name="full-name" />
+      <ResumeInputField label="Occupation:" name="occupation" />
+      <ResumeInputField type="tel" label="Telephone:" name="telephone" />
+      <ResumeInputField type="email" label="email" name="email" />
+      <ResumeInputField label="location" name="location" />
+      <ResumeInputField label="linkedin" name="linkedin" />
+    </ResumeForm>
   );
 };
 
@@ -74,39 +52,15 @@ const EducationInterface = () => {
   
   if (addingExperience) {
     return (
-      <form onSubmit={handleSubmit}>
-        <div className={styles.formField}>
-          <label htmlFor="school-name">School Name</label>
-          <input type="text" id="school-name" name="school-name" required />
-        </div>
-        
+      <ResumeForm onSubmit={handleSubmit}>
+        <ResumeInputField label="School Name:" name="school-name" />
         <div className={styles.schoolYear}>
-          <div className={styles.formField}>
-            <label htmlFor="sy-from">From</label>
-            <input type="number" min="0" max="9999" id="sy-from" name="sy-from" required />
-          </div>
-        
-          <div className={styles.formField}>
-            <label htmlFor="sy-to">To</label>
-            <input type="number" min="0" max="9999" id="sy-to" name="sy-to" required />
-          </div>
+          <ResumeInputField type="number" label="From:" name="sy-from" min="0" max="9999" required />
+          <ResumeInputField type="number" label="To:" name="sy-to" min="0" max="9999" required />
         </div>
         
-        <div className={styles.cancelok}>
-          <Button0
-          onClick={() => setAddingExperience(false)}
-          className={styles.cancel}
-          type="button"
-          >
-          Cancel
-          </Button0>
-          <Button0
-          className={styles.ok}
-          >
-          Ok
-          </Button0>
-        </div>
-      </form>
+        <ResumeCancelOk onCancel={() => setAddingExperience(false)} />
+      </ResumeForm>
     );
   } else {
     return (
@@ -154,10 +108,9 @@ const WorkInterface = () => {
     },
   ]);
   const [addingExperience, setAddingExperience] = useState(false);
-  
   const inputRef = useRef();
   const [addingAchievement, setAddingAchievement] = useState(false);
-  const [achievementList, setAchievementList] = useState(["Working with the wider development team"]);
+  const [achievementList, setAchievementList] = useState([]);
   
   const handleAddAchievement = (e) => {
     setAddingAchievement(false);
@@ -183,30 +136,15 @@ const WorkInterface = () => {
   
   if (addingExperience) {
     return (
-      <form onSubmit={handleSubmit}>
-        <div className={styles.formField}>
-          <label htmlFor="company-name">Company Name:</label>
-          <input type="text" id="company-name" name="company-name" required />
-        </div>
-        
+      <ResumeForm>
+        <ResumeInputField label="Company Name:" name="company-name" required />  
         <div className={styles.schoolYear}>
-          <div className={styles.formField}>
-            <label htmlFor="work-from">From:</label>
-            <input type="number" min="0" max="9999" id="work-from" name="work-from" required />
-          </div>
-        
-          <div className={styles.formField}>
-            <label htmlFor="work-to">To:</label>
-            <input type="number" min="0" max="9999" id="work-to" name="work-to" required />
-          </div>
+          <ResumeInputField type="number" min="0" max="9999" label="From:" name="work-from" required />
+          <ResumeInputField type="number" min="0" max="9999" label="To:" name="work-to" required />
         </div>
+        <ResumeInputField label="Position:" name="position" required />
         
-        <div className={styles.formField}>
-          <label htmlFor="position">Position:</label>
-          <input type="text" id="position" name="position" required />
-        </div>
-        
-        <div className={styles.formField}>
+        <div className={styles.resumeInputField}>
           <label htmlFor="work-to">Achievements:</label>
           <ul>
             {achievementList.map(achievement => (
@@ -246,21 +184,8 @@ const WorkInterface = () => {
           )}
         </div>
         
-        <div className={styles.cancelok}>
-          <Button0
-            onClick={handleCancel}
-            className={styles.cancel}
-            type="button"
-          >
-            Cancel
-          </Button0>
-          <Button0
-            className={styles.ok}
-          >
-            Ok
-          </Button0>
-        </div>
-      </form>
+        <ResumeCancelOk onCancel={handleCancel} />
+      </ResumeForm>
     );
   } else {
     return (
