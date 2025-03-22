@@ -129,6 +129,20 @@ const WorkInterface = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const fd = new FormData(e.target);
+    const companyName = fd.get("company-name");
+    const workFrom = fd.get("work-from");
+    const workTo = fd.get("work-to");
+    const position = fd.get("work-position");
+    
+    setWorks([...works,
+    {
+      id: works.length + 1,
+      name: companyName,
+      from: workFrom,
+      to: workTo,
+      position,
+      achievements: [...achievementList],
+    }]);
     
     setAddingExperience(false);
     setAchievementList([]);
@@ -136,7 +150,7 @@ const WorkInterface = () => {
   
   if (addingExperience) {
     return (
-      <ResumeForm>
+      <ResumeForm onSubmit={handleSubmit}>
         <ResumeInputField label="Company Name:" name="company-name" required />  
         <div className={styles.schoolYear}>
           <ResumeInputField type="number" min="0" max="9999" label="From:" name="work-from" required />
@@ -197,7 +211,7 @@ const WorkInterface = () => {
                 alt="delete entry"
                 src="./svgrepo/trash-bin-minimalistic-svgrepo-com.svg"
                 className={styles.deleteBtn}
-                onClick={() => setSchools(works.filter(s => s.id !== work.id))}
+                onClick={() => setWorks(works.filter(s => s.id !== work.id))}
               />
               <div className={styles.info}>
                 <h3>{work.name}</h3>
@@ -219,6 +233,116 @@ const WorkInterface = () => {
         <Button0
           className={styles.btnAddNewExp}
           onClick={() => setAddingExperience(true)}
+        >
+          New
+        </Button0>
+      </div>
+    );
+  }
+};
+ 
+const DescriptionInterface = () => {
+  return (
+    <ResumeForm>
+      <textarea rows="10"></textarea>
+    </ResumeForm>
+  );
+};
+ 
+const SkillsInterface = () => {
+  const [addingEntry, setAddingEntry] = useState(false);
+  const [entryList, setEntryList] = useState(
+    [
+      { id: 1, name: "HTML", level: 3, },
+      { id: 2, name: "CSS", level: 3, },
+    ]
+  );
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    
+    const skillName = fd.get("skill-name");
+    const skillLevel = fd.get("skill-level-select");
+    
+    let level = 1;
+    if (skillLevel === "Amateur") {
+      level = 2;
+    } else if (skillLevel === "Competent") {
+      level = 3;
+    } else if (skillLevel === "Proficient") {
+      level = 4;
+    } else if (skillLevel === "Expert") {
+      level = 5;
+    }
+    
+    setEntryList(
+      [
+        ...entryList,
+        {
+          id: entryList.length + 1,
+          name: skillName,
+          level: level, 
+        }
+      ]
+    );
+    
+    setAddingEntry(false);
+  };
+  
+  const generateCircles = (level) => {
+    const result = [];
+    for (let i = 0; i < 5; ++i) {
+      result.push(
+        <div className={`${styles.levelCircle} ${i < level ? styles.enabled : ""}`}></div>
+      );
+    }
+    
+    return result;
+  };
+
+  if (addingEntry) {
+    return (
+      <ResumeForm onSubmit={handleSubmit}>
+        <ResumeInputField label="Skill Name:" name="skill-name" />
+        
+        <div className={styles.resumeInputField}>
+          <label htmlFor="skill-level-select">Choose a Skill Level:</label>
+          <select id="skill-level-select" name="skill-level-select" required>
+            <option value="Beginner">Beginner</option>
+            <option value="Amateur">Amateur</option>
+            <option value="Competent">Competent</option>
+            <option value="Proficient">Proficient</option>
+            <option value="Expert">Expert</option>
+          </select>
+        </div>
+        <ResumeCancelOk onCancel={() => setAddingEntry(false)} />
+      </ResumeForm>
+    );
+  } else {
+    return (
+      <div className={styles.generic}>
+        <ul className={styles.genericEntryList}>
+          {entryList.map(entry => (
+            <li key={entry.id}>
+              <ButtonImage
+                alt="delete entry"
+                src="./svgrepo/trash-bin-minimalistic-svgrepo-com.svg"
+                className={styles.deleteBtn}
+                onClick={() => setEntryList(entryList.filter(e => e.id !== entry.id))}
+              />
+              <p>{entry.name}</p>
+              
+              <div className={styles.levelCircles}>
+                {generateCircles(entry.level)}
+              </div>
+            </li>
+          ))}
+        </ul>
+        
+        <Button0
+          className={styles.btnAddNew}
+          onClick={() => setAddingEntry(true)}
         >
           New
         </Button0>
@@ -280,7 +404,13 @@ const SkillsInput = () => {
           <EducationInterface />
         ) : (selected === 3) ? (
           <WorkInterface />
-        ) : null}
+        ) : (selected === 4) ? (
+          <DescriptionInterface />
+        ) : (selected === 5) ? (
+          <SkillsInterface />
+        ) : (
+          null
+        )}
       </div>
     </div>
   );

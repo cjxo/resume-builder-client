@@ -61,6 +61,22 @@
     }
   }
   
+  .levelCircles {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+    .levelCircle {
+      width: 8px;
+      height: 8px;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.4);
+      
+      &.enabled {
+        background-color: var(--green0);
+      }
+    }
+  }
+  
   .addBtn {
     background-color: var(--blue3);
     border: 2px solid white;
@@ -179,11 +195,16 @@ form.resumeForm {
   flex-direction: column;
   gap: 16px;
   
-  input {
+  input, textarea, select {
     padding: 8px;
     border-radius: 8px;
     font-size: 16px;
     box-shadow: inset 1px 1px 4px #888;
+    border: 2px solid black;
+  }
+  
+  textarea {
+    resize: none;
   }
   
   label {
@@ -253,4 +274,28 @@ form.resumeForm {
 
 .resumeDisplay {
   flex-grow: 1;
+}
+
+.generic {
+  display: flex;
+  flex-direction: column;
+  
+  .btnAddNew {
+    padding: 8px 32px;
+    margin-left: auto;
+    width: fit-content;
+  }
+}
+
+ul.genericEntryList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--blue2);
+  font-family: "JosefinSansIt";
+  li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 }
