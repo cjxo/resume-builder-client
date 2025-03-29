@@ -227,14 +227,8 @@ const DescriptionInterface = () => {
   );
 };
  
-const SkillsInterface = () => {
+const SkillsInterface = ({ entryList, setEntryList }) => {
   const [addingEntry, setAddingEntry] = useState(false);
-  const [entryList, setEntryList] = useState(
-    [
-      { id: 1, name: "HTML", level: 3, },
-      { id: 2, name: "CSS", level: 3, },
-    ]
-  );
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -350,6 +344,15 @@ const SkillsInput = () => {
   
   const [selected, setSelected] = useState(1);
   
+  const [skills, setSkills] = useState([
+    { id: 1, name: "HTML", level: 3, },
+    { id: 2, name: "CSS", level: 3, },
+  ]);
+
+  const [languages, setLanguages] = useState([
+    { id: 1, name: "Japanese", level: 2, },
+    { id: 2, name: "English", level: 4, },
+  ]);
   return (
     <div className={styles.resumeInput}>
       <ul className={styles.inputList}>
@@ -376,7 +379,9 @@ const SkillsInput = () => {
         ) : (selected === 4) ? (
           <DescriptionInterface />
         ) : (selected === 5) ? (
-          <SkillsInterface />
+          <SkillsInterface entryList={skills} setEntryList={setSkills} />
+        ) : (selected === 6) ? (
+          <SkillsInterface entryList={languages} setEntryList={setLanguages} />
         ) : (
           null
         )}
