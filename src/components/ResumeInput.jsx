@@ -4,6 +4,7 @@ import ButtonImage from "./ButtonImage";
 import { Button0 } from "./Button.jsx";
 import styles from "../styles/component.module.css";
 import ResumeForm, { ResumeInputField, ResumeCancelOk } from "./ResumeForm";
+import GenericEntryContainer from "./GenericEntryContainer";
 
 const GeneralInterface = () => {
   return (
@@ -54,7 +55,7 @@ const EducationInterface = () => {
     return (
       <ResumeForm onSubmit={handleSubmit}>
         <ResumeInputField label="School Name:" name="school-name" />
-        <div className={styles.schoolYear}>
+        <div className={styles.experienceYear}>
           <ResumeInputField type="number" label="From:" name="sy-from" min="0" max="9999" required />
           <ResumeInputField type="number" label="To:" name="sy-to" min="0" max="9999" required />
         </div>
@@ -64,31 +65,20 @@ const EducationInterface = () => {
     );
   } else {
     return (
-      <div className={styles.experiences}>
-        <ul className={styles.experienceList}>
-          {schools.map(school => (
-            <li key={school.id}>
-              <ButtonImage
-                alt="delete entry"
-                src="./svgrepo/trash-bin-minimalistic-svgrepo-com.svg"
-                className={styles.deleteBtn}
-                onClick={() => setSchools(schools.filter(s => s.id !== school.id))}
-              />
+      <GenericEntryContainer
+        onNewRequest={() => setAddingExperience(true)}
+        entryList={schools.map(school => ({
+            id: school.id,
+            jsx: (
               <div className={styles.info}>
                 <h3>{school.name}</h3>
                 <p className={styles.duration}>{school.from + " - " + school.to}</p>
               </div>
-            </li>
-          ))}
-        </ul>
-        
-        <Button0
-          className={styles.btnAddNewExp}
-          onClick={() => setAddingExperience(true)}
-        >
-          New
-        </Button0>
-      </div>
+            ),
+          }
+        ))}
+        onEntryDelete={(id) => setSchools(schools.filter(s => s.id !== id))}
+      /> 
     );
   }
 };
@@ -152,7 +142,7 @@ const WorkInterface = () => {
     return (
       <ResumeForm onSubmit={handleSubmit}>
         <ResumeInputField label="Company Name:" name="company-name" required />  
-        <div className={styles.schoolYear}>
+        <div className={styles.experienceYear}>
           <ResumeInputField type="number" min="0" max="9999" label="From:" name="work-from" required />
           <ResumeInputField type="number" min="0" max="9999" label="To:" name="work-to" required />
         </div>
@@ -203,16 +193,11 @@ const WorkInterface = () => {
     );
   } else {
     return (
-      <div className={styles.experiences}>
-        <ul className={styles.experienceList}>
-          {works.map(work => (
-            <li key={work.id}>
-              <ButtonImage
-                alt="delete entry"
-                src="./svgrepo/trash-bin-minimalistic-svgrepo-com.svg"
-                className={styles.deleteBtn}
-                onClick={() => setWorks(works.filter(s => s.id !== work.id))}
-              />
+      <GenericEntryContainer
+        onNewRequest={() => setAddingExperience(true)}
+        entryList={works.map(work => ({
+            id: work.id,
+            jsx: (
               <div className={styles.info}>
                 <h3>{work.name}</h3>
                 <p className={styles.duration}>{work.from + " - " + work.to}</p>
@@ -225,18 +210,11 @@ const WorkInterface = () => {
                   ))}
                 </ul>
               </div>
-              
-            </li>
-          ))}
-        </ul>
-        
-        <Button0
-          className={styles.btnAddNewExp}
-          onClick={() => setAddingExperience(true)}
-        >
-          New
-        </Button0>
-      </div>
+            ),
+          }
+        ))}
+        onEntryDelete={(id) => setWorks(works.filter(w => w.id !== id))}
+      />
     );
   }
 };
@@ -294,7 +272,7 @@ const SkillsInterface = () => {
     const result = [];
     for (let i = 0; i < 5; ++i) {
       result.push(
-        <div className={`${styles.levelCircle} ${i < level ? styles.enabled : ""}`}></div>
+        <div className={`${styles.levelCircle} ${(i < level) && styles.enabled}`}></div>
       );
     }
     
@@ -321,32 +299,23 @@ const SkillsInterface = () => {
     );
   } else {
     return (
-      <div className={styles.generic}>
-        <ul className={styles.genericEntryList}>
-          {entryList.map(entry => (
-            <li key={entry.id}>
-              <ButtonImage
-                alt="delete entry"
-                src="./svgrepo/trash-bin-minimalistic-svgrepo-com.svg"
-                className={styles.deleteBtn}
-                onClick={() => setEntryList(entryList.filter(e => e.id !== entry.id))}
-              />
-              <p>{entry.name}</p>
-              
-              <div className={styles.levelCircles}>
-                {generateCircles(entry.level)}
+      <GenericEntryContainer
+        onNewRequest={() => setAddingEntry(true)}
+        entryList={entryList.map(entry => ({
+            id: entry.id,
+            jsx: (
+              <div className={styles.skillsWrap}> 
+                <p>{entry.name}</p>
+                
+                <div className={styles.levelCircles}>
+                  {generateCircles(entry.level)}
+                </div>
               </div>
-            </li>
-          ))}
-        </ul>
-        
-        <Button0
-          className={styles.btnAddNew}
-          onClick={() => setAddingEntry(true)}
-        >
-          New
-        </Button0>
-      </div>
+            ),
+          }
+        ))}
+        onEntryDelete={(id) => setEntryList(entryList.filter(e => e.id !== id))}
+      />
     );
   }
 };

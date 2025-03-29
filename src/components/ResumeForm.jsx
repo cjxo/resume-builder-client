@@ -28,7 +28,6 @@ const ResumeCancelOk = ({ onCancel }) => {
   );
 };
 
-
 export { ResumeInputField, ResumeCancelOk };
 export default ResumeForm;
 
