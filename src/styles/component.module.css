@@ -100,6 +100,19 @@
     @media (min-width: 768px) {
       padding: 8px 32px;
     }
+
+    .header {
+      display: flex; 
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    img {
+      width: 32px;
+      aspect-ratio: 1 / 1;
+      flex-shrink: 0;
+    }
     
     h2 {
       text-align: center;

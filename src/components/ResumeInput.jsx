@@ -319,26 +319,32 @@ const SkillsInput = () => {
     {
       id: 1,
       name: "General",
+      img: "./svgrepo/document-general-letter-4-svgrepo-com.svg",
     },
     {
       id: 2,
       name: "Education",
+      img: "./svgrepo/book-svgrepo-com.svg"
     },
     {
       id: 3,
       name: "Work",
+      img: "./svgrepo/work-case-filled-svgrepo-com.svg",
     },
     {
       id: 4,
       name: "Description",
+      img: "./svgrepo/info-alt-svgrepo-com.svg",
     },
     {
       id: 5,
       name: "Skills",
+      img: "./svgrepo/brain-14-svgrepo-com.svg",
     },
     {
       id: 6,
       name: "Languages",
+      img: "./svgrepo/language-square-svgrepo-com.svg",
     },
   ];
   
@@ -369,7 +375,13 @@ const SkillsInput = () => {
         ))}
       </ul>
       <div className={styles.fieldDisplay}>
-        <h2>{fields[selected - 1].name}</h2>
+        <div className={styles.header}>
+          <img
+            src={fields[selected - 1].img}
+            alt={`${fields[selected - 1].name}`}
+          />
+          <h2>{fields[selected - 1].name}</h2>
+        </div>
         {(selected === 1) ? (
           <GeneralInterface />
         ) : (selected === 2) ? (
