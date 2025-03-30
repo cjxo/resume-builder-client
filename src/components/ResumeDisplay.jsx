@@ -95,7 +95,13 @@ const SkillsDisplay = ({ name, imgSrc, skills }) => {
 const ProfileDisplay = () => {
   return (
     <div className={styles.profileDisplay}>
-      <h2>Profile</h2>
+      <div className={styles.displayHeader}>
+        <img
+          src="./svgrepo/info-alt-svgrepo-com-black.svg"
+          alt="Profile"
+        />
+        <h2>Profile</h2>
+      </div>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </p>
@@ -106,7 +112,13 @@ const ProfileDisplay = () => {
 const WorkDisplay = () => {
   return (
     <div className={styles.workDisplay}>
-      <h2>Work</h2>
+      <div className={styles.displayHeader}>
+        <img
+          src="./svgrepo/work-case-filled-svgrepo-com-black.svg"
+          alt="Work"
+        />
+        <h2>Work</h2>
+      </div>
       <ul className={styles.workList}>
         <li>
           <div className={styles.year}>

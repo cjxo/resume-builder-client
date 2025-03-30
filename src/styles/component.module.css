@@ -114,7 +114,7 @@
       flex-shrink: 0;
     }
     
-    h2 {
+h2 {
       text-align: center;
       color: var(--blue2);
       font-size: 24px;
@@ -299,18 +299,18 @@ form.resumeForm {
 
   .displayHeader {
     img {
-      width: 28px;
+      width: 26px;
     }
 
     h2 {
-      font-size: 22px;
+      font-size: 20px;
     }
 
     background-color: var(--blue1);
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     padding: 4px;
     margin-bottom: 8px;
   }
@@ -330,6 +330,15 @@ form.resumeForm {
   .rightSide {
     flex-grow: 1;
     padding: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    color: #222222;
+
+    .displayHeader {
+      background-color: #EEEEEE;
+    }
   }
 }
 
@@ -398,6 +407,55 @@ form.resumeForm {
       align-items: center;
       justify-content: space-between;
       font-size: 18px;
+    }
+  }
+}
+
+.workDisplay {
+  .workList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    li {
+      display: flex;
+      gap: 16px;
+
+      .year {
+        p {
+          font-weight: 300;
+        }
+
+        p:nth-child(2) {
+          text-align: center;
+          font-weight: 600;
+        }
+      }
+
+      .verticalBar {
+        border: 1px solid #ffe8b7;
+      }
+
+      .desc {
+        .workName {
+          font-size: 18px;
+        }
+
+        .workPos {
+          color: #555;
+        }
+      }
+    }
+  }
+
+  .achievementList {
+    margin-top: 8px;
+    list-style-type: circle;
+    padding-left: 16px;
+    li {
+      display: list-item;
+      font-weight: 350;
+      font-size: 16px;
     }
   }
 }
