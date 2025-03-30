@@ -6,8 +6,11 @@ import styles from "../styles/component.module.css";
 import ResumeForm, { ResumeInputField, ResumeCancelOk } from "./ResumeForm";
 import GenericEntryContainer from "./GenericEntryContainer";
 import LevelCircles from "./LevelCircles";
+import useResumeFields from "../hooks/useResumeFields";
 
-const GeneralInterface = ({ general, setGeneral }) => {
+const GeneralInterface = () => {
+  const { general, setGeneral } = useResumeFields();
+
   return (
     <ResumeForm>
       <ResumeInputField
@@ -52,7 +55,8 @@ const GeneralInterface = ({ general, setGeneral }) => {
   );
 };
 
-const EducationInterface = ({ schools, setSchools }) => {
+const EducationInterface = () => {
+  const { schools, setSchools } = useResumeFields();
   const [addingExperience, setAddingExperience] = useState(false);
   
   const handleSubmit = (e) => {
@@ -101,7 +105,9 @@ const EducationInterface = ({ schools, setSchools }) => {
   }
 };
 
-const WorkInterface = ({ works, setWorks }) => { 
+const WorkInterface = () => { 
+  const { works, setWorks } = useResumeFields();
+
   const [addingExperience, setAddingExperience] = useState(false);
   const inputRef = useRef();
   const [addingAchievement, setAddingAchievement] = useState(false);
@@ -224,7 +230,8 @@ const WorkInterface = ({ works, setWorks }) => {
   }
 };
  
-const DescriptionInterface = ({ description, setDescription }) => {
+const DescriptionInterface = () => {
+  const { description, setDescription } = useResumeFields();
   const handleChange = (e) => {
     setDescription(e.target.value);
   };
@@ -309,15 +316,7 @@ const SkillsInterface = ({ entryList, setEntryList }) => {
   }
 };
 
-const SkillsInput =
-  ({
-    general, setGeneral,
-    skills, setSkills,
-    languages, setLanguages,
-    schools, setSchools,
-    works, setWorks,
-    description, setDescription,
-  }) => {
+const SkillsInput = () => {
   const fields = [
     {
       id: 1,
@@ -353,6 +352,9 @@ const SkillsInput =
   
   const [selected, setSelected] = useState(1);
 
+  const { skills, setSkills } = useResumeFields();
+  const { languages, setLanguages } = useResumeFields();
+
   return (
     <section className={styles.resumeInput}>
       <ul className={styles.inputList}>
@@ -377,13 +379,13 @@ const SkillsInput =
           <h2>{fields[selected - 1].name}</h2>
         </div>
         {(selected === 1) ? (
-          <GeneralInterface general={general} setGeneral={setGeneral} />
+          <GeneralInterface />
         ) : (selected === 2) ? (
-          <EducationInterface schools={schools} setSchools={setSchools} />
+          <EducationInterface />
         ) : (selected === 3) ? (
-          <WorkInterface works={works} setWorks={setWorks} />
+          <WorkInterface />
         ) : (selected === 4) ? (
-          <DescriptionInterface description={description} setDescription={setDescription} />
+          <DescriptionInterface />
         ) : (selected === 5) ? (
           <SkillsInterface entryList={skills} setEntryList={setSkills} />
         ) : (selected === 6) ? (

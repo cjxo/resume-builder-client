@@ -1,7 +1,9 @@
 import styles from "../styles/component.module.css";
 import LevelCircles from "./LevelCircles";
+import useResumeFields from "../hooks/useResumeFields";
 
-const GeneralDisplay = ({ general }) => {
+const GeneralDisplay = () => {
+  const { general } = useResumeFields();
   return (
     <div className={styles.generalDisplay}>
       <div>
@@ -46,7 +48,8 @@ const GeneralDisplay = ({ general }) => {
   );
 };
 
-const EducationDisplay = ({ schools }) => {
+const EducationDisplay = () => {
+  const { schools } = useResumeFields();
   return (
     <div className={styles.educationDisplay}>
       <div className={styles.displayHeader}>
@@ -90,7 +93,8 @@ const SkillsDisplay = ({ name, imgSrc, skills }) => {
   );
 };
 
-const ProfileDisplay = ({ description }) => {
+const ProfileDisplay = () => {
+  const { description } = useResumeFields();
   return (
     <div className={styles.profileDisplay}>
       <div className={styles.displayHeader}>
@@ -107,7 +111,8 @@ const ProfileDisplay = ({ description }) => {
   );
 };
  
-const WorkDisplay = ({ works }) => {
+const WorkDisplay = () => {
+  const { works } = useResumeFields();
   return (
     <div className={styles.workDisplay}>
       <div className={styles.displayHeader}>
@@ -146,23 +151,17 @@ const WorkDisplay = ({ works }) => {
   );
 };
 
-const ResumeDisplay =
-  ({
-    general,
-    skills,
-    languages,
-    schools,
-    works,
-    description,
-  }) => {
-
+const ResumeDisplay = () => {
   // TODO(cj): displaying long worded fields will expand the resume. find a way to prevent this.
   // TODO(cj): we need to decide the correct dimensions of the resume 
+  
+  const { skills, } = useResumeFields();
+  const { languages, } = useResumeFields();
   return (
     <section className={styles.resumeDisplay}>
       <div className={styles.leftSide}>
-        <GeneralDisplay general={general} />
-        <EducationDisplay schools={schools} />
+        <GeneralDisplay  />
+        <EducationDisplay />
         <SkillsDisplay
           name="Skills"
           skills={skills}
@@ -176,8 +175,8 @@ const ResumeDisplay =
       </div>
 
       <div className={styles.rightSide}>
-        <ProfileDisplay description={description} />
-        <WorkDisplay works={works} />
+        <ProfileDisplay />
+        <WorkDisplay />
       </div>
     </section>
   );
