@@ -109,4 +109,5 @@ button {
 
 .main-content {
   display: flex;
+  gap: 16px;
 }

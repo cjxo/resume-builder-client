@@ -5,6 +5,7 @@ import { Button0 } from "./Button.jsx";
 import styles from "../styles/component.module.css";
 import ResumeForm, { ResumeInputField, ResumeCancelOk } from "./ResumeForm";
 import GenericEntryContainer from "./GenericEntryContainer";
+import LevelCircles from "./LevelCircles";
 
 const GeneralInterface = () => {
   return (
@@ -261,18 +262,7 @@ const SkillsInterface = ({ entryList, setEntryList }) => {
     
     setAddingEntry(false);
   };
-  
-  const generateCircles = (level) => {
-    const result = [];
-    for (let i = 0; i < 5; ++i) {
-      result.push(
-        <div className={`${styles.levelCircle} ${(i < level) && styles.enabled}`}></div>
-      );
-    }
-    
-    return result;
-  };
-
+ 
   if (addingEntry) {
     return (
       <ResumeForm onSubmit={handleSubmit}>
@@ -301,9 +291,7 @@ const SkillsInterface = ({ entryList, setEntryList }) => {
               <div className={styles.skillsWrap}> 
                 <p>{entry.name}</p>
                 
-                <div className={styles.levelCircles}>
-                  {generateCircles(entry.level)}
-                </div>
+                <LevelCircles level={entry.level} />
               </div>
             ),
           }
@@ -360,7 +348,7 @@ const SkillsInput = () => {
     { id: 2, name: "English", level: 4, },
   ]);
   return (
-    <div className={styles.resumeInput}>
+    <section className={styles.resumeInput}>
       <ul className={styles.inputList}>
         {fields.map(({ id, name }) => (
           <li key={id}>
@@ -398,7 +386,7 @@ const SkillsInput = () => {
           null
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

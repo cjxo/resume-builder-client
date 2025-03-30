@@ -172,23 +172,7 @@
   .skillsWrap {
     display: flex;
     align-items: center;
-    flex-grow: 1;
-
-    .levelCircles {
-      display: flex;
-      gap: 4px;
-      margin-left: auto;
-      .levelCircle {
-        width: 8px;
-        height: 8px;
-        border-radius: 8px;
-        background-color: rgba(255, 255, 255, 0.4);
-        
-        &.enabled {
-          background-color: var(--green0);
-        }
-      }
-    }
+    flex-grow: 1; 
   }
   
   ul.genericEntryList {
@@ -291,6 +275,57 @@ form.resumeForm {
   }
 }
 
+.levelCircles {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+  .levelCircle {
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.4);
+    
+    &.enabled {
+      background-color: var(--green0);
+    }
+  }
+}
+
 .resumeDisplay {
+  display: flex;
   flex-grow: 1;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  font-family: "JosefinSansIt";
+
+
+  .leftSide {
+    background-color: var(--blue0);
+    color: var(--blue2);
+    flex-grow: 1;
+    flex-shrink: 0;
+    padding: 32px;
+  }
+
+  .rightSide {
+    flex-grow: 2;
+    padding: 32px;
+  }
+}
+
+.generalDisplay {
+  > div {
+    .name {
+      font-weight: 700;
+      font-size: 30px;
+    }
+    .occupation {
+      font-weight: 200;
+      opacity: 0.9;
+      font-size: 24px;
+    }
+  }
+
+  > ul {
+    font-weight: 400;
+  }
 }
