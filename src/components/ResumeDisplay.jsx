@@ -11,18 +11,34 @@ const GeneralDisplay = () => {
       
       <ul>
         <li>
+          <img
+            src="./svgrepo/phone-svgrepo-com.svg"
+            alt="Telephone Number"
+          />
           <p>123-456-789</p>
         </li>
    
         <li>
+          <img
+            src="./svgrepo/email-svgrepo-com.svg"
+            alt="Email"
+          />
           <p>nice-email@legit.com</p>
         </li>
 
         <li>
+          <img
+            src="./svgrepo/location-svgrepo-com.svg"
+            alt="Location"
+          />
           <p>1232 Legit St., Somewhere City</p>
         </li>
         
         <li>
+          <img
+            src="./svgrepo/linkedin-svgrepo-com.svg"
+            alt="LinkedIn"
+          />
           <p>https://www.linkedin.com/</p>
         </li>
       </ul>
@@ -33,7 +49,13 @@ const GeneralDisplay = () => {
 const EducationDisplay = () => {
   return (
     <div className={styles.educationDisplay}>
-      <h2>Education</h2>
+      <div className={styles.displayHeader}>
+        <img
+          src="./svgrepo/book-svgrepo-com.svg"
+          alt="Education"
+        />
+        <h2>Education</h2>
+      </div>
       <ul>
         <li>
           <h3>Some Epic School</h3>
@@ -48,10 +70,16 @@ const EducationDisplay = () => {
   );
 };
 
-const SkillsDisplay = ({ name, skills }) => {
+const SkillsDisplay = ({ name, imgSrc, skills }) => {
   return (
     <div className={styles.skillsDisplay}>
-      <h2>{name}</h2>
+      <div className={styles.displayHeader}>
+        <img
+          src={imgSrc}
+          alt={name}
+        />
+        <h2>{name}</h2>
+      </div>
       <ul>
         {skills.map(skill => (
           <li key={skill.id}>
@@ -121,8 +149,16 @@ const ResumeDisplay = () => {
       <div className={styles.leftSide}>
         <GeneralDisplay />
         <EducationDisplay />
-        <SkillsDisplay name="Skills" skills={skills} />
-        <SkillsDisplay name="Languages" skills={languages} />
+        <SkillsDisplay
+          name="Skills"
+          skills={skills}
+          imgSrc="./svgrepo/brain-14-svgrepo-com.svg"
+        />
+        <SkillsDisplay
+          name="Languages"
+          skills={languages}
+          imgSrc="./svgrepo/language-square-svgrepo-com.svg"
+        />
       </div>
 
       <div className={styles.rightSide}>

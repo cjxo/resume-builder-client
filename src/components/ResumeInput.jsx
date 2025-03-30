@@ -312,7 +312,7 @@ const SkillsInput = () => {
     {
       id: 2,
       name: "Education",
-      img: "./svgrepo/book-svgrepo-com.svg"
+      img: "./svgrepo/book-svgrepo-com.svg",
     },
     {
       id: 3,

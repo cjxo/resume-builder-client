@@ -297,18 +297,39 @@ form.resumeForm {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   font-family: "JosefinSansIt";
 
+  .displayHeader {
+    img {
+      width: 28px;
+    }
+
+    h2 {
+      font-size: 22px;
+    }
+
+    background-color: var(--blue1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 4px;
+    margin-bottom: 8px;
+  }
 
   .leftSide {
     background-color: var(--blue0);
     color: var(--blue2);
     flex-grow: 1;
     flex-shrink: 0;
-    padding: 32px;
+    padding: 48px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
   .rightSide {
-    flex-grow: 2;
-    padding: 32px;
+    flex-grow: 1;
+    padding: 48px;
   }
 }
 
@@ -318,14 +339,65 @@ form.resumeForm {
       font-weight: 700;
       font-size: 30px;
     }
+
     .occupation {
       font-weight: 200;
       opacity: 0.9;
       font-size: 24px;
     }
+    
+    margin-bottom: 16px; 
   }
 
   > ul {
     font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    
+    li {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    img {
+      width: 24px;
+      aspect-ratio: 1;
+    }
+  }
+}
+
+.educationDisplay {
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    li {
+      h3 {
+        font-weight: 400;
+        font-size: 18px;
+      }
+
+      p {
+        font-weight: 200;
+      }
+    }
+  }
+}
+
+.skillsDisplay {
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 18px;
+    }
   }
 }
