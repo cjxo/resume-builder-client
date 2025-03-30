@@ -1,12 +1,12 @@
 import styles from "../styles/component.module.css";
 import LevelCircles from "./LevelCircles";
 
-const GeneralDisplay = () => {
+const GeneralDisplay = ({ general }) => {
   return (
     <div className={styles.generalDisplay}>
       <div>
-        <h2 className={styles.name}>Christian Joseph</h2>
-        <h2 className={styles.occupation}>Software Engineer</h2>
+        <h2 className={styles.name}>{general.fullName}</h2>
+        <h2 className={styles.occupation}>{general.occupation}</h2>
       </div>
       
       <ul>
@@ -15,7 +15,7 @@ const GeneralDisplay = () => {
             src="./svgrepo/phone-svgrepo-com.svg"
             alt="Telephone Number"
           />
-          <p>123-456-789</p>
+          <p>{general.telephone}</p>
         </li>
    
         <li>
@@ -23,7 +23,7 @@ const GeneralDisplay = () => {
             src="./svgrepo/email-svgrepo-com.svg"
             alt="Email"
           />
-          <p>nice-email@legit.com</p>
+          <p>{general.email}</p>
         </li>
 
         <li>
@@ -31,7 +31,7 @@ const GeneralDisplay = () => {
             src="./svgrepo/location-svgrepo-com.svg"
             alt="Location"
           />
-          <p>1232 Legit St., Somewhere City</p>
+          <p>{general.location}</p>
         </li>
         
         <li>
@@ -39,14 +39,14 @@ const GeneralDisplay = () => {
             src="./svgrepo/linkedin-svgrepo-com.svg"
             alt="LinkedIn"
           />
-          <p>https://www.linkedin.com/</p>
+          <p>{general.linkedin}</p>
         </li>
       </ul>
     </div>
   );
 };
 
-const EducationDisplay = () => {
+const EducationDisplay = ({ schools }) => {
   return (
     <div className={styles.educationDisplay}>
       <div className={styles.displayHeader}>
@@ -57,14 +57,12 @@ const EducationDisplay = () => {
         <h2>Education</h2>
       </div>
       <ul>
-        <li>
-          <h3>Some Epic School</h3>
-          <p>2010 - 2018</p>
-        </li>
-        <li>
-          <h3>Wellspring Christian Family Schools</h3>
-          <p>2019 - 2022</p>
-        </li>
+        {schools.map(school => (
+          <li key={school.id}>
+            <h3>{school.name}</h3>
+            <p>{school.from + " - " + school.to}</p>
+          </li>
+        ))}
       </ul>
     </div>
   );
@@ -92,7 +90,7 @@ const SkillsDisplay = ({ name, imgSrc, skills }) => {
   );
 };
 
-const ProfileDisplay = () => {
+const ProfileDisplay = ({ description }) => {
   return (
     <div className={styles.profileDisplay}>
       <div className={styles.displayHeader}>
@@ -103,13 +101,13 @@ const ProfileDisplay = () => {
         <h2>Profile</h2>
       </div>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        {description}
       </p>
     </div>
   );
 };
-
-const WorkDisplay = () => {
+ 
+const WorkDisplay = ({ works }) => {
   return (
     <div className={styles.workDisplay}>
       <div className={styles.displayHeader}>
@@ -120,47 +118,51 @@ const WorkDisplay = () => {
         <h2>Work</h2>
       </div>
       <ul className={styles.workList}>
-        <li>
-          <div className={styles.year}>
-            <p>2020</p>
-            <p>-</p>
-            <p>2023</p>
-          </div>
-        
-          <div className={styles.verticalBar}>
-          </div>
-
-          <div className={styles.desc}>
-            <h3 className={styles.workName}>Epic Company Co.</h3>
-            <p className={styles.workPos}>Product Design Manager</p>
+        {works.map(work => (
+          <li key={work.id}>
+            <div className={styles.year}>
+              <p>{work.from}</p>
+              <p>-</p>
+              <p>{work.to}</p>
+            </div>
             
-            <ul className={styles.achievementList}>
-              <li>Working with the wider development team</li>
-              <li>Manage website design, content, and SEO Marketing, Branding and Logo Design</li>
-            </ul>
-          </div>
-        </li>
+            <div className={styles.verticalBar}>
+            </div>
+              
+            <div className={styles.desc}>
+              <h3 className={styles.workName}>{work.name}</h3>
+              <p className={styles.workPos}>{work.position}</p>
+              
+              <ul className={styles.achievementList}>
+                {work.achievements.map(achievement => (
+                  <li key={achievement}>{achievement}</li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))}
       </ul>
     </div>
   );
 };
 
-const ResumeDisplay = () => {
-  const skills = [
-    { id: 1, name: "HTML", level: 3, },
-    { id: 2, name: "CSS", level: 3, },
-  ];
+const ResumeDisplay =
+  ({
+    general,
+    skills,
+    languages,
+    schools,
+    works,
+    description,
+  }) => {
 
-  const languages = [
-    { id: 1, name: "Japanese", level: 2, },
-    { id: 2, name: "English", level: 4, },
-  ];
-
+  // TODO(cj): displaying long worded fields will expand the resume. find a way to prevent this.
+  // TODO(cj): we need to decide the correct dimensions of the resume 
   return (
     <section className={styles.resumeDisplay}>
       <div className={styles.leftSide}>
-        <GeneralDisplay />
-        <EducationDisplay />
+        <GeneralDisplay general={general} />
+        <EducationDisplay schools={schools} />
         <SkillsDisplay
           name="Skills"
           skills={skills}
@@ -174,8 +176,8 @@ const ResumeDisplay = () => {
       </div>
 
       <div className={styles.rightSide}>
-        <ProfileDisplay />
-        <WorkDisplay />
+        <ProfileDisplay description={description} />
+        <WorkDisplay works={works} />
       </div>
     </section>
   );

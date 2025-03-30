@@ -7,35 +7,52 @@ import ResumeForm, { ResumeInputField, ResumeCancelOk } from "./ResumeForm";
 import GenericEntryContainer from "./GenericEntryContainer";
 import LevelCircles from "./LevelCircles";
 
-const GeneralInterface = () => {
+const GeneralInterface = ({ general, setGeneral }) => {
   return (
     <ResumeForm>
-      <ResumeInputField label="Full Name:" name="full-name" />
-      <ResumeInputField label="Occupation:" name="occupation" />
-      <ResumeInputField type="tel" label="Telephone:" name="telephone" />
-      <ResumeInputField type="email" label="email" name="email" />
-      <ResumeInputField label="location" name="location" />
-      <ResumeInputField label="linkedin" name="linkedin" />
+      <ResumeInputField
+        value={general.fullName}
+        onChange={(e) => setGeneral({ ...general, fullName: e.target.value })}
+        label="Full Name:"
+        name="full-name"
+      />
+      <ResumeInputField
+        value={general.occupation}
+        onChange={(e) => setGeneral({ ...general, occupation: e.target.value })}
+        label="Occupation:"
+        name="occupation"
+      />
+      <ResumeInputField
+        value={general.telephone}
+        onChange={(e) => setGeneral({ ...general, telephone: e.target.value })}
+        type="tel"
+        label="Telephone:"
+        name="telephone"
+      />
+      <ResumeInputField
+        value={general.email}
+        onChange={(e) => setGeneral({ ...general, email: e.target.value })}
+        type="email"
+        label="email"
+        name="email"
+      />
+      <ResumeInputField
+        value={general.location}
+        onChange={(e) => setGeneral({ ...general, location: e.target.value })}
+        label="location"
+        name="location"
+      />
+      <ResumeInputField
+        value={general.linkedin}
+        onChange={(e) => setGeneral({ ...general, linkedin: e.target.value })}
+        label="linkedin"
+        name="linkedin"
+      />
     </ResumeForm>
   );
 };
 
-const EducationInterface = () => {
-  const [schools, setSchools] = useState([
-    {
-      id: 1,
-      name: "Some Epic School",
-      from: 2010,
-      to: 2018
-    },
-    {
-      id: 2,
-      name: "Wellspring Christian Family Schools",
-      from: 2019,
-      to: 2022,
-    },
-  ]);
-  
+const EducationInterface = ({ schools, setSchools }) => {
   const [addingExperience, setAddingExperience] = useState(false);
   
   const handleSubmit = (e) => {
@@ -84,20 +101,7 @@ const EducationInterface = () => {
   }
 };
 
-const WorkInterface = () => {
-  const [works, setWorks] = useState([
-    {
-      id: 1,
-      name: "Some Company Co.",
-      from: 2020,
-      to: 2023,
-      position: "Product Design Manager",
-      achievements: [
-        "Working with the wider development team",
-        "Manage website design, content, and SEO Marketing, Branding and Logo Design",
-      ],
-    },
-  ]);
+const WorkInterface = ({ works, setWorks }) => { 
   const [addingExperience, setAddingExperience] = useState(false);
   const inputRef = useRef();
   const [addingAchievement, setAddingAchievement] = useState(false);
@@ -123,7 +127,7 @@ const WorkInterface = () => {
     const companyName = fd.get("company-name");
     const workFrom = fd.get("work-from");
     const workTo = fd.get("work-to");
-    const position = fd.get("work-position");
+    const position = fd.get("position");
     
     setWorks([...works,
     {
@@ -220,10 +224,13 @@ const WorkInterface = () => {
   }
 };
  
-const DescriptionInterface = () => {
+const DescriptionInterface = ({ description, setDescription }) => {
+  const handleChange = (e) => {
+    setDescription(e.target.value);
+  };
   return (
     <ResumeForm>
-      <textarea rows="10"></textarea>
+      <textarea rows="10" value={description} onChange={handleChange}></textarea>
     </ResumeForm>
   );
 };
@@ -302,7 +309,15 @@ const SkillsInterface = ({ entryList, setEntryList }) => {
   }
 };
 
-const SkillsInput = () => {
+const SkillsInput =
+  ({
+    general, setGeneral,
+    skills, setSkills,
+    languages, setLanguages,
+    schools, setSchools,
+    works, setWorks,
+    description, setDescription,
+  }) => {
   const fields = [
     {
       id: 1,
@@ -337,16 +352,7 @@ const SkillsInput = () => {
   ];
   
   const [selected, setSelected] = useState(1);
-  
-  const [skills, setSkills] = useState([
-    { id: 1, name: "HTML", level: 3, },
-    { id: 2, name: "CSS", level: 3, },
-  ]);
 
-  const [languages, setLanguages] = useState([
-    { id: 1, name: "Japanese", level: 2, },
-    { id: 2, name: "English", level: 4, },
-  ]);
   return (
     <section className={styles.resumeInput}>
       <ul className={styles.inputList}>
@@ -371,13 +377,13 @@ const SkillsInput = () => {
           <h2>{fields[selected - 1].name}</h2>
         </div>
         {(selected === 1) ? (
-          <GeneralInterface />
+          <GeneralInterface general={general} setGeneral={setGeneral} />
         ) : (selected === 2) ? (
-          <EducationInterface />
+          <EducationInterface schools={schools} setSchools={setSchools} />
         ) : (selected === 3) ? (
-          <WorkInterface />
+          <WorkInterface works={works} setWorks={setWorks} />
         ) : (selected === 4) ? (
-          <DescriptionInterface />
+          <DescriptionInterface description={description} setDescription={setDescription} />
         ) : (selected === 5) ? (
           <SkillsInterface entryList={skills} setEntryList={setSkills} />
         ) : (selected === 6) ? (
