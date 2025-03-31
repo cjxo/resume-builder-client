@@ -152,7 +152,6 @@ const WorkDisplay = () => {
 };
 
 const ResumeDisplay = () => {
-  // TODO(cj): displaying long worded fields will expand the resume. find a way to prevent this.
   // TODO(cj): we need to decide the correct dimensions of the resume 
   
   const { skills, } = useResumeFields();

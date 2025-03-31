@@ -110,5 +110,10 @@ button {
 
 .main-content {
   display: flex;
+  flex-direction: column;
   gap: 16px;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
 }
