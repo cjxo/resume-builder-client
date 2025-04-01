@@ -58,18 +58,15 @@ const GeneralInterface = () => {
 const EducationInterface = () => {
   const { schools, setSchools } = useResumeFields();
   const [addingExperience, setAddingExperience] = useState(false);
+  const [schoolToEdit, setSchoolToEdit] = useState(null);
 
-  const [editId, setEditId] = useState(null);
-  const [schoolName, setSchoolName] = useState("");
-  const [fromTo, setFromTo] = useState({});
+  console.log(schools);
  
   const handleEntryEdit = (id) => {
     const school = schools.find(school => school.id === id);
     if (school) {
-      setEditId(id);
+      setSchoolToEdit(school);
       setAddingExperience(true);
-      setSchoolName(school.name);
-      setFromTo({ from: school.from, to: school.to });
     }
   };
 
@@ -81,33 +78,29 @@ const EducationInterface = () => {
     const syFrom = fd.get("sy-from");
     const syTo = fd.get("sy-to");
 
-    if (editId) {
-      const newSchools = [...schools];
-      const school = newSchools.find(school => school.id === editId);
-      school.name = schoolName;
-      school.from = syFrom;
-      school.to = syTo;
-      setSchools(newSchools);
+    if (schoolToEdit) {
+      schoolToEdit.name = schoolName;
+      schoolToEdit.from = syFrom;
+      schoolToEdit.to = syTo;
+      setSchools([...schools]);
     } else {
       setSchools([
         ...schools,
-        { id: schools.length + 1, name: schoolName, from: syFrom, to: syTo }
+        { id: schools.length ? (schools[schools.length - 1].id + 1) : 1, name: schoolName, from: syFrom, to: syTo }
       ]);
     }
     
     setAddingExperience(false);
-    setEditId(null);
-    setSchoolName("");
-    setFromTo({});
+    setSchoolToEdit(null);
   };
   
   if (addingExperience) {
     return (
       <ResumeForm onSubmit={handleSubmit}>
-        <ResumeInputField defaultValue={schoolName} label="School Name:" name="school-name" />
+        <ResumeInputField defaultValue={schoolToEdit?.name} label="School Name:" name="school-name" />
         <div className={styles.experienceYear}>
-          <ResumeInputField type="number" defaultValue={fromTo.from} label="From:" name="sy-from" min="0" max="9999" required />
-          <ResumeInputField type="number" defaultValue={fromTo.to} label="To:" name="sy-to" min="0" max="9999" required />
+          <ResumeInputField type="number" defaultValue={schoolToEdit?.from} label="From:" name="sy-from" min="0" max="9999" required />
+          <ResumeInputField type="number" defaultValue={schoolToEdit?.to} label="To:" name="sy-to" min="0" max="9999" required />
         </div>
         
         <ResumeCancelOk onCancel={() => setAddingExperience(false)} />
@@ -137,14 +130,10 @@ const EducationInterface = () => {
 const WorkInterface = () => { 
   const { works, setWorks } = useResumeFields();
 
-  console.log(works);
-  const [editId, setEditId] = useState(null);
+  const [workToEdit, setWorkToEdit] = useState(null);
   const [addingExperience, setAddingExperience] = useState(false);
   const inputRef = useRef();
 
-  const [companyName, setCompanyName] = useState("");
-  const [fromTo, setFromTo] = useState({});
-  const [position, setPosition] = useState("");
   const [addingAchievement, setAddingAchievement] = useState(false);
   const [achievementList, setAchievementList] = useState([]);
   
@@ -153,28 +142,22 @@ const WorkInterface = () => {
     
     const target = inputRef.current;
     if (target.value) {
-      setAchievementList((list) => [...list, { id: list.length + 1, name: target.value }]);
+      setAchievementList((list) => [...list, { id: list.length ? (list[list.length - 1].id + 1) : 1, name: target.value }]);
     }
   };
   
   const handleCancel = () => {
-    setEditId(null);
+    setWorkToEdit(null);
     setAddingExperience(false);
     setAchievementList([]);
-    setCompanyName("");
-    setFromTo({});
-    setPosition("");
   };
 
   const handleEntryEdit = (id) => {
     const work = works.find(work => work.id === id);
     if (work) {
+      setWorkToEdit(work);
       setAchievementList([...work.achievements]);
-      setCompanyName(work.name);
-      setFromTo({ from: work.from, to: work.to });
-      setPosition(work.position);
       setAddingExperience(true);
-      setEditId(id);
     }
   };
   
@@ -186,25 +169,23 @@ const WorkInterface = () => {
     const workFrom = fd.get("work-from");
     const workTo = fd.get("work-to");
     const position = fd.get("position");
-    if (editId) {
-      const newWorks = [...works];
-      const work = newWorks.find(work => work.id === editId);
-      work.name = companyName;
-      work.from = workFrom;
-      work.to = workTo;
-      work.position = position;
-      work.achievements = [...achievementList];
-      setWorks(newWorks);
+    if (workToEdit) {
+      workToEdit.name = companyName;
+      workToEdit.from = workFrom;
+      workToEdit.to = workTo;
+      workToEdit.position = position;
+      workToEdit.achievements = achievementList;
+      setWorks([...works]);
     } else {
       setWorks([
         ...works,
         {
-          id: works.length + 1,
+          id: works.length ? (works[works.length - 1].id + 1) : 1,
           name: companyName,
           from: workFrom,
           to: workTo,
           position,
-          achievements: [...achievementList],
+          achievements: achievementList,
         }
       ]);
     }
@@ -215,12 +196,12 @@ const WorkInterface = () => {
   if (addingExperience) {
     return (
       <ResumeForm onSubmit={handleSubmit}>
-        <ResumeInputField label="Company Name:" defaultValue={companyName} name="company-name" required />  
+        <ResumeInputField label="Company Name:" defaultValue={workToEdit?.name} name="company-name" required />  
         <div className={styles.experienceYear}>
-          <ResumeInputField type="number" defaultValue={fromTo.from} min="0" max="9999" label="From:" name="work-from" required />
-          <ResumeInputField type="number" min="0" defaultValue={fromTo.to} max="9999" label="To:" name="work-to" required />
+          <ResumeInputField type="number" defaultValue={workToEdit?.from} min="0" max="9999" label="From:" name="work-from" required />
+          <ResumeInputField type="number" min="0" defaultValue={workToEdit?.to} max="9999" label="To:" name="work-to" required />
         </div>
-        <ResumeInputField label="Position:" defaultValue={position} name="position" required />
+        <ResumeInputField label="Position:" defaultValue={workToEdit?.position} name="position" required />
         
         <div className={styles.resumeInputField}>
           <label htmlFor="work-to">Achievements:</label>
@@ -314,44 +295,45 @@ const DescriptionInterface = () => {
  
 const SkillsInterface = ({ entryList, setEntryList }) => {
   const [addingEntry, setAddingEntry] = useState(false);
-  
-  const [editId, setEditId] = useState(null);
-  const [skillName, setSkillName] = useState("");
-  const [skillLevelSelect, setSkillLevelSelect] = useState("Beginner"); 
+  const [entryToEdit, setEntryToEdit] = useState(null);
+
+  const mapLevelToSkillLevelName = (level) => {
+    let skillLevel = "Beginner";
+    switch (level) {
+      case 2: {
+        skillLevel = "Amateur";
+      } break;
+
+      case 3: {
+        skillLevel = "Competent";
+      } break;
+
+      case 4: {
+        skillLevel = "Proficient";
+      } break;
+
+      case 5: {
+        skillLevel = "Expert";
+      } break;
+
+      default: {
+        skillLevel = "";
+      } break;
+    }
+
+    return skillLevel;
+  };
 
   const handleEntryEdit = (id) => {
     const entry = entryList.find(entry => entry.id === id);
     if (entry) {
-      setEditId(id);
-      setSkillName(entry.name);
-      console.log(entry);
+      setEntryToEdit(entry);
       setAddingEntry(true);
-      let skillLevel = "Beginner";
-      switch (entry.level) {
-        case 2: {
-          skillLevel = "Amateur";
-        } break;
-
-        case 3: {
-          skillLevel = "Competent";
-        } break;
-
-        case 4: {
-          skillLevel = "Proficient";
-        } break;
-
-        case 5: {
-          skillLevel = "Expert";
-        } break;
-      }
-      setSkillLevelSelect(skillLevel);
     }
   };
 
   const handleCancel = () => {
-    setEditId(null);
-    setSkillName("");
-    setSkillLevelSelect("Beginner");
+    setEntryToEdit(null);
     setAddingEntry(false);
   };
   
@@ -373,18 +355,16 @@ const SkillsInterface = ({ entryList, setEntryList }) => {
       level = 5;
     }
     
-    if (editId) {
-      const newEntryList = [...entryList];
-      const entry = newEntryList.find(entry => entry.id === editId);
-      entry.name = skillName;
-      entry.level = level;
-      setEntryList(newEntryList);
+    if (entryToEdit) {
+      entryToEdit.name = skillName;
+      entryToEdit.level = level;
+      setEntryList([...entryList]);
     } else {
       setEntryList(
         [
           ...entryList,
           {
-            id: entryList.length + 1,
+            id: entryList.length ? (entryList[entryList.length - 1].id + 1) : 1,
             name: skillName,
             level: level, 
           }
@@ -398,11 +378,11 @@ const SkillsInterface = ({ entryList, setEntryList }) => {
   if (addingEntry) {
     return (
       <ResumeForm onSubmit={handleSubmit}>
-        <ResumeInputField defaultValue={skillName} label="Skill Name:" name="skill-name" />
+        <ResumeInputField defaultValue={entryToEdit?.name} label="Skill Name:" name="skill-name" />
         
         <div className={styles.resumeInputField}>
           <label htmlFor="skill-level-select">Choose a Skill Level:</label>
-          <select defaultValue={skillLevelSelect} id="skill-level-select" name="skill-level-select" required>
+          <select defaultValue={mapLevelToSkillLevelName(entryToEdit?.level) || "Beginner"} id="skill-level-select" name="skill-level-select" required>
             <option value="Beginner">Beginner</option>
             <option value="Amateur">Amateur</option>
             <option value="Competent">Competent</option>
@@ -422,7 +402,6 @@ const SkillsInterface = ({ entryList, setEntryList }) => {
             jsx: (
               <div className={styles.skillsWrap}> 
                 <p>{entry.name}</p>
-                
                 <LevelCircles level={entry.level} />
               </div>
             ),

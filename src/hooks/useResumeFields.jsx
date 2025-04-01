@@ -15,6 +15,7 @@ const ResumeFieldContext = createContext({
   // {
   //   id: Nonnegative Integer,
   //   name: String,
+  //   level: Nonnegative Integer
   // }
   skills: [],
   setSkills: () => {},
