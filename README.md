@@ -1,12 +1,41 @@
-# React + Vite
+# Resume Builder
+This is the front-end application for Resume Builder. This is a toy app, so for now, it doesn't save your resume.
+If you reload the page, then the resume inputs reset back to default.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Features
+- UI for General: name, occupation, telephone, email, location, and linkedin.
+- UI for Education: school name and duration
+- UI for Work: company name, position, and duration
+- UI for Description / Profile
+- UI for Skills with circles that describe your skill level
+- UI for Languages with circles that describe your skill level
 
-Currently, two official plugins are available:
+# Missing Features
+- [ ] Resume Save (if you reload the page, then the resume inputs reset back to defaults, which is bad)
+- [ ] Multiple Resumes (an API that saves multiple resumes)
+- [ ] Download resume as PDF
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Prerequisites Before Installation
+- Node.js
+- NPM
 
-## Expanding the ESLint configuration
+# Installation
+```bash
+git clone https://github.com/cjxo/resume-builder-client.git
+cd resume-builder-client
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Once Vite has started, you should see a similar-looking output
+```bash
+  VITE v6.1.0  ready in 325 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+```
+The client app will be available at the address provided by 'Local'.
+
+# Attribution
+- [SVGRepo](https://www.svgrepo.com/)
