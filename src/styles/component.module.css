@@ -4,6 +4,7 @@
 
 .button0 {
   border: 2px solid white;
+  border-bottom: 4px solid white;
   background-color: var(--blue1);
   color: var(--blue2);
   font-size: 16px;
@@ -13,8 +14,8 @@
   &:hover {
     color: var(--blue0);
     background-color: var(--yellow1);
-}
-  
+  }
+
   @media (min-width: 768px) {
     font-size: 18px;
   }
@@ -44,7 +45,7 @@
   gap: 8px;
   flex-basis: 400px;
   
-  .addBtn, .deleteBtn {
+  .addBtn {
     border-radius: 8px;
     display: flex;
     height: fit-content;
@@ -52,15 +53,7 @@
     flex-shrink: 0;
     width: fit-content;
   }
-  
-  .deleteBtn {
-    background-color: var(--red0);
-    img {
-      width: 24px;
-      height: 24px;
-    }
-  }
-  
+ 
   .addBtn {
     background-color: var(--blue3);
     border: 2px solid white;
@@ -179,6 +172,28 @@
     flex-grow: 1; 
   }
   
+  .deleteBtn, .editBtn {
+    border-radius: 8px;
+    display: flex;
+    height: fit-content;
+    padding: 4px;
+    flex-shrink: 0;
+    width: fit-content;
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .deleteBtn {
+    background-color: var(--red0);
+  }
+
+  .editBtn {
+    background-color: var(--green0);
+  }
+  
   ul.genericEntryList {
     display: flex;
     flex-direction: column;
@@ -186,6 +201,11 @@
     li {
       display: flex;
       gap: 8px;
+      .deleteEdit {
+        flex-shrink: 0;
+        display: flex;
+        gap: 4px;
+      }
     }
   }
   
@@ -257,12 +277,29 @@ form.resumeForm {
     gap: 4px;
     
     ul {
-      list-style-type: circle;
       font-family: "JosefinSansIt";
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
       li {
-        margin-left: 16px;
-        word-break: break-all;
-        font-weight: 300;
+        margin-left: 8px;
+        display: flex;
+        gap: 4px;
+        button {
+          flex-shrink: 0;
+          align-self: start;
+          background-color: var(--red0);
+          border-radius: 8px;
+          img {
+            width: 20px;
+            height: 20px;
+          }
+        }
+        p {
+          word-break: break-all;
+          font-weight: 300;
+        }
       }
       color: var(--blue2);
     }

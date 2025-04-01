@@ -140,7 +140,7 @@ const WorkDisplay = () => {
               
               <ul className={styles.achievementList}>
                 {work.achievements.map(achievement => (
-                  <li key={achievement}>{achievement}</li>
+                  <li key={achievement.id}>{achievement.name}</li>
                 ))}
               </ul>
             </div>

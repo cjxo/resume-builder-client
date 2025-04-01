@@ -3,18 +3,26 @@ import ButtonImage from "./ButtonImage";
 import { Button0 } from "./Button.jsx";
 import PropTypes from "prop-types";
 
-const GenericEntryContainer = ({ onNewRequest, entryList, onEntryDelete }) => {
+const GenericEntryContainer = ({ onNewRequest, entryList, onEntryDelete, onEntryEdit }) => {
   return (
     <div className={styles.generic}>
       <ul className={styles.genericEntryList}>
         {entryList.map((entry) => (
           <li key={entry.id}>
-            <ButtonImage
-              alt="delete entry"
-              src="./svgrepo/trash-bin-minimalistic-svgrepo-com.svg"
-              className={styles.deleteBtn}
-              onClick={() => onEntryDelete(entry.id)}
-            />
+            <div className={styles.deleteEdit}>
+              <ButtonImage
+                alt="delete entry"
+                src="./svgrepo/trash-bin-minimalistic-svgrepo-com.svg"
+                className={styles.deleteBtn}
+                onClick={() => onEntryDelete(entry.id)}
+              />
+              <ButtonImage
+                alt="add entry"
+                src="./svgrepo/edit-svgrepo-com.svg"
+                className={styles.editBtn}
+                onClick={() => onEntryEdit(entry.id)}
+              />
+            </div>
             {entry.jsx}
           </li>
         ))}
@@ -34,4 +42,5 @@ GenericEntryContainer.propTypes = {
     jsx: PropTypes.node.isRequired,
   }).isRequired,
   onEntryDelete: PropTypes.func.isRequired,
+  onEntryEdit: PropTypes.func.isRequired,
 };

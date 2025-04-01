@@ -5,7 +5,7 @@ const LevelCircles = ({ level }) => {
     const result = [];
     for (let i = 0; i < 5; ++i) {
       result.push(
-        <div className={`${styles.levelCircle} ${(i < level) && styles.enabled}`}></div>
+        <div key={(i+1)<<1} className={`${styles.levelCircle} ${(i < level) && styles.enabled}`}></div>
       );
     }
     

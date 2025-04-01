@@ -45,7 +45,7 @@ const ResumeFieldContext = createContext({
   //   from: Nonnegative Integer,
   //   to: Nonnegative Integer,
   //   position: String,
-  //   achievements: Array Of Strings
+  //   achievements: Array Of { id: Nonnegative Integer, name: string }
   // } 
   works: [],
   setWorks: () => {},
@@ -96,8 +96,14 @@ const ResumeFieldProvider = ({ children }) => {
       to: 2023,
       position: "Product Design Manager",
       achievements: [
-        "Working with the wider development team",
-        "Manage website design, content, and SEO Marketing, Branding and Logo Design",
+        {
+          id: 1,
+          name: "Working with the wider development team",
+        },
+        {
+          id: 2,
+          name: "Manage website design, content, and SEO Marketing, Branding and Logo Design",
+        },
       ],
     },
   ]);
