@@ -57,16 +57,18 @@ const ResumeFieldContext = createContext({
 
 const ResumeFieldProvider = ({ children }) => {
   const [general, setGeneral] = useState({
-    fullName: "Christian Joseph",
+    fullName: "Your Full Name",
     occupation: "Software Engineer",
     telephone: "123-456-789",
-    email: "nice-email@legit.com",
+    email: "your-email@email.com",
     location: "1232 Legit St., Somewhere City",
     linkedin: "https://www.linkedin.com/",
   });
   const [skills, setSkills] = useState([
     { id: 1, name: "HTML", level: 3, },
     { id: 2, name: "CSS", level: 3, },
+    { id: 3, name: "JavaScript", level: 3, },
+    { id: 4, name: "HLSL", level: 4, },
   ]);
 
   const [languages, setLanguages] = useState([
@@ -77,13 +79,13 @@ const ResumeFieldProvider = ({ children }) => {
   const [schools, setSchools] = useState([
     {
       id: 1,
-      name: "Some Epic School",
+      name: "Your School0 Here",
       from: 2010,
-      to: 2018
+      to: 2018,
     },
     {
       id: 2,
-      name: "Wellspring Christian Family Schools",
+      name: "Your School1 Here",
       from: 2019,
       to: 2022,
     },
