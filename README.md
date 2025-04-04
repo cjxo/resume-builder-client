@@ -1,6 +1,6 @@
 # Resume Builder
 This is the front-end application for Resume Builder. This is a toy app, so for now, it doesn't save your resume.
-If you reload the page, then the resume inputs reset back to default.
+If you reload the page, then the resume inputs reset back to default. Please see the [live preview](https://resume-builder-client.netlify.app/).
 
 # Features
 - UI for General: name, occupation, telephone, email, location, and linkedin.
